@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+{% block title %}课程库{% endblock %}
+{% block content %}
+    {% load my_tags %}
+
+    <form action="" method="get" class="form-inline pull-right" style="margin: 5px 0">
+        <input type="text" id="search" name="query" class="form-control">
+
+        <button class="btn btn-sm btn-primary">搜索</button>
+    </form>
+
+    <form action="" method="post" class="form-inline">
+        {% csrf_token %}
+        <select name="action" id="" class="form-control">
+            <option value="multi_pub"> 收藏书籍</option>
+            </select>
+        <button class="btn btn-sm btn-primary">提交</button>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>选择</th>
+                <th>课程号</th>
+                <th>课程名</th>
+                <th>主讲人</th>
+                <th>大学</th>
+                <th>课程链接</th>
+                <th>学生</th>
+                <th>推荐量</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dic in obj %}
+                <tr>
+                    <td>
+                        <input type="checkbox"  name="ids" value="{{ dic.order_num }}">
+
+                    <td id="order_id">{{ dic.order_num }}</td>
+                    <td>{{ dic.course }}</td>
+                    <td>{{ dic.teacher }}</td>
+                    <td>{{ dic.school }}</td>
+                    <td>{{ dic.link }}</td>
+                    <td>{{ dic.stu_num }}</td>
+                    <td id="commend_id">{{ dic.commend }}</td>
+                    <td>
+                        <a id="tj_click" href="?tid={{ dic.order_num }}"> <i id="tj" class="fa fa-heart-o"></i> 推荐</a>
+{#                        <button id="tj" > <i class="fa  fa-heart-o"></i> 推荐</button >#}
+{#                        <a href="{% url 'book_tj' dic.order_num %}" id="tj" > <i class="fa  fa-heart-o"></i> 推荐</a>#}
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </form>
+    <div id="footer">Footer Section
+     <nav aria-label="Page navigation-sm" style="margin-top: -40px">
+            <ul class="pagination">
+                {{ page_html|safe }}
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+
+    $("#search").each(function(){
+        var thisVal=$(this).val();
+        //判断文本框的值是否为空，有值的情况就隐藏提示语，没有值就显示
+        if(thisVal!=""){
+            $(this).attr("value","");
+        }else{
+             $(this).attr("value","书名, 编程语言");
+        }
+        //聚焦型输入框验证
+        $(this).focus(function(){
+            $(this).attr("value","");
+        }).blur(function(){
+            var val=$(this).val();
+            if(val!=""){
+                 $(this).attr("value","");
+            }else{
+                 $(this).attr("value","书名, 编程语言");
+            }
+        });
+    })
+
+
+</script>
+{% endblock %}
+

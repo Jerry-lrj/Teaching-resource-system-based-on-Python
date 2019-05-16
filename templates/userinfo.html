@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}用户中心{% endblock %}
+{% block content %}
+
+    <form action="" method="post" class="form-inline">
+        {% csrf_token %}
+        <select name="action" id="" class="form-control">
+            <option value="multi_pub"> 删除用户</option>
+            </select>
+        <button class="btn btn-sm btn-primary">提交</button>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>选择</th>
+                <th>序号</th>
+                <th>用户名</th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>生日</th>
+                <th>学校</th>
+                <th>注册时间</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for dic in obj %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="ids" value="{{ dic.pk }}">
+                    </td>
+
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ dic.username }}</td>
+                    <td>{{ dic.name }}</td>
+                    <td>{{ dic.mobile }}</td>
+                    <td>{{ dic.birthday| date:"Y-m-d" }}</td>
+                    <td>{{ dic.school }}</td>
+                    <td>{{ dic.date_joined | date:"Y-m-d" }}</td>
+
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </form>
+    <div id="footer">
+     <nav aria-label="Page navigation-sm" style="margin-top: -40px">
+            <ul class="pagination">
+                {{ page_html|safe }}
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+
+
+

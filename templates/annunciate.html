@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/annunciate.css' %}">
+    <style>
+        .commentbox {
+            width: 900px;
+            margin: 20px auto;
+        }
+
+        .mytextarea {
+            width: 100%;
+            overflow: auto;
+            word-break: break-all;
+            height: 100px;
+            color: #000;
+            font-size: 1em;
+            resize: none;
+        }
+
+        .comment-list .comment-info header {
+            width: 10%;
+            position: absolute;
+        }
+
+        .comment-list .comment-info header img {
+            width: 100%;
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .comment-list .comment-info .comment-right {
+            padding: 5px 0px 5px 11%;
+        }
+
+        .comment-list .comment-info .comment-right h3 {
+            margin: 5px 0px;
+        }
+
+        .comment-list .comment-info .comment-right .comment-content-header {
+            height: 25px;
+        }
+
+        .comment-list .comment-info .comment-right .comment-content-header span, .comment-list .comment-info .comment-right .comment-content-footer span {
+            padding-right: 2em;
+            color: #aaa;
+        }
+
+        .comment-list .comment-info .comment-right .comment-content-header span, .comment-list .comment-info .comment-right .comment-content-footer span.reply-btn, .send, .reply-list-btn {
+            cursor: pointer;
+        }
+
+        .comment-list .comment-info .comment-right .reply-list {
+            border-left: 3px solid #ccc;
+            padding-left: 7px;
+        }
+
+        .comment-list .comment-info .comment-right .reply-list .reply {
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .comment-list .comment-info .comment-right .reply-list .reply div span {
+            padding-left: 10px;
+        }
+
+        .comment-list .comment-info .comment-right .reply-list .reply p span {
+            padding-right: 2em;
+            color: #aaa;
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    公告
+{% endblock %}
+{% block content %}
+
+    <form action="" method="post" style="display: {{ qx }}">
+        {% csrf_token %}
+        <div class="commentbox">
+                <textarea cols="80" rows="50" placeholder="输入公告......" class="mytextarea" id="content"
+                          name="text"></textarea>
+            <button class="btn btn-info pull-right" id="comment">发布</button>
+        </div>
+    </form>
+    <div style="height:100px;"></div>
+    <div class="news-content" style="margin-left: 25%">
+        <div class="news-content-item">
+            <a href="javascript:;" class="news-content-title clearfix">
+                <div class="news-title-fl">
+                    <div class="news-title-color"></div>
+                    <div class="news-title-title">官方公告</div>
+                </div>
+                <div class="news-title-fr news-title-img01"></div>
+            </a>
+            <ul class="news-content-lists clearfix">
+                {% for ann in annunciate_obj %}
+                    <li class="clearfix">
+                        <h4>
+                            <i>【{{ ann.date | date:'Y-m-d' }}】</i>&nbsp;&nbsp;
+                            <span>{{ ann.msg }}</span>
+                        </h4>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}

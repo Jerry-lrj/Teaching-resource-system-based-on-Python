@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}个人信息{% endblock %}
+{% block content %}
+
+    <div class="row text-center vertical-middle-sm">
+        <h1>编辑我的信息</h1>
+
+        <div class="row" style="margin-left: 300px;margin-top: 20px">
+            <div class="col-md-7">
+                <form class="form-horizontal" action="{% url 'ge' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+{#                    {{ form_obj.errors }}#}
+
+
+                    <div class="form-group" id="ipt">
+                        <label for="{{ form_obj.username.id_for_label }}"
+                               class="col-sm-3 control-label">{{ form_obj.username.label }}</label>
+                        <div class="col-sm-9">
+                            {{ form_obj.username }}
+                            {{ form_obj.username.errors.0 }}
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="{{ form_obj.name.id_for_label }}"
+                               class="col-sm-3 control-label">{{ form_obj.name.label }}</label>
+                        <div class="col-sm-9">
+                            {{ form_obj.name }}
+                            {{ form_obj.name.errors.0 }}
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="{{ form_obj.mobile.id_for_label }}"
+                               class="col-sm-3 control-label">{{ form_obj.mobile.label }}</label>
+                        <div class="col-sm-9">
+                            {{ form_obj.mobile }}
+                            {{ form_obj.mobile.errors.0 }}
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="{{ form_obj.birthday.id_for_label }}"
+                               class="col-sm-3 control-label">{{ form_obj.birthday.label }}</label>
+                        <div class="col-sm-9">
+                            {{ form_obj.birthday }}
+                            {{ form_obj.birthday.errors.0 }}
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="{{ form_obj.school.id_for_label }}"
+                               class="col-sm-3 control-label">{{ form_obj.school.label }}</label>
+                        <div class="col-sm-9">
+                            {{ form_obj.school }}
+                            {{ form_obj.school.errors.0 }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form_obj.date_joined.id_for_label }}"
+                               class="col-sm-3 control-label">{{ form_obj.date_joined.label }}</label>
+                        <div class="col-sm-9">
+                            {{ form_obj.date_joined }}
+                            {{ form_obj.date_joined.errors.0 }}
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <input type="submit" id="btn" class="btn btn-primary btn-lg" value="提交">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+

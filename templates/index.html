@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block title %}课程推荐排行{% endblock %}
+{% block content %}
+        <form action="" method="post" class="form-inline">
+        {% csrf_token %}
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+
+                <th>课程号</th>
+                <th>课程名</th>
+                <th>主讲人</th>
+                <th>大学</th>
+                <th>学生人数</th>
+                <th>推荐次数</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for dic in obj %}
+                <tr>
+
+                    <td>{{ dic.order_num }}</td>
+                    <td>{{ dic.course }}</td>
+                    <td>{{ dic.teacher }}</td>
+                    <td>{{ dic.school }}</td>
+                    <td>{{ dic.stu_num }}</td>
+                    <td>{{ dic.commend }}</td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </form>
+{% endblock %}
